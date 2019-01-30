@@ -49,9 +49,10 @@ def prune(C,i,tran_1,min_sup):
 			subsets_of_C = support_count(tran_1,subsets_of_C)
 			if(all(x > min_sup for x in subsets_of_C.values())):
 				pruned_C.append(key)
-			#print('Subset of C is :', subsets_of_C)
+			print('Subset of C is :', subsets_of_C)
+			subsets_of_C = []
 
-		#print('pruned C is :',pruned_C)
+		print('pruned C is :',pruned_C)
 		return pruned_C
 
 #Reading of csv file
