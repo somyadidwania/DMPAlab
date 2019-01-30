@@ -70,16 +70,18 @@ with open(file_name) as csv_file:
 print(tran)
 C1 = dict(sorted(C1.items()))
 print("C1 item set is ", C1)
-
+L_final = []
 min_sup = int(input("Enter the minimum support : "))
 #L1 generation
 L1 = sup_cnt_comparison(C1,min_sup)
 print("L1 item set is ", L1)
+L_final = L_final + list(L1.keys())
 C2 = generate_C(list(L1.keys()),2)
 print("C2 item set is ", C2)
 C2 = support_count(tran,C2)
 print("New C2 is = ",C2)
 L2 = sup_cnt_comparison(C2,min_sup)
+L_final = L_final + list(L2.keys())
 print('L2 is :',L2)
 
 #Apriori Starts
@@ -94,6 +96,7 @@ while len(C) > 0:
 		C = support_count(tran,C)
 		print('C',i,' is : ',C)
 		L = sup_cnt_comparison(C,min_sup)
+		L_final = L_final + list(L.keys())
 		print('Now L',i,' is : ',L)
 		i = i + 1
 		C = generate_C(list(C.keys()),i)
@@ -102,3 +105,5 @@ while len(C) > 0:
 			break
 	else:
 		break
+print('\n\n')
+print('Final L generated after successfully running Apriori Algorithm : ',L_final)
