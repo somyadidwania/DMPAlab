@@ -44,8 +44,8 @@ def prune(C,i,tran_1,min_sup):
 		subsets_of_C = []
 		pruned_C = []
 		for key in C:
-			for j in range(1,i):
-				subsets_of_C = subsets_of_C + generate_C(key,j) 
+			for j in range(1,i): 
+					subsets_of_C = subsets_of_C + list(combinations(key,j))
 			subsets_of_C = support_count(tran_1,subsets_of_C)
 			if(all(x >= min_sup for x in subsets_of_C.values())):
 				pruned_C.append(key)
