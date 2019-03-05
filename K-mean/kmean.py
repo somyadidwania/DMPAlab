@@ -1,5 +1,21 @@
 import csv
 import random
+import matplotlib.pyplot as plt
+
+def plot_cluster(clusters,centroids):
+	for key,value in clusters.items():
+		if value == 0:
+			c = 'red'
+			plt.scatter(*list(key), s = 20, c = c)
+		elif value == 1:
+			c = 'blue'
+			plt.scatter(*list(key), s = 20, c = c)
+		else:
+			c = random.randint(0,255)
+			plt.scatter(*list(key), s = 20, c = c)
+	plt.scatter(*zip(*centroids), s = 50, c = 'black')
+	plt.show()
+
 
 def formClusters(Centroids,dataset):
 	cluster = {}
@@ -45,7 +61,6 @@ print("First cluster: ",old_clusters)
 counter = 0
 new_clusters = old_clusters
 while True:
-	centroids = []
 	new_k_cent = []
 	for i in range(k):
 		k_th_clus = [x for x,y in new_clusters.items() if y == i]
@@ -53,6 +68,8 @@ while True:
 	print("new centroids: ",new_k_cent)
 	old_clusters = new_clusters
 	new_clusters = formClusters(new_k_cent,data)
+	if len(new_k_cent[0]) == 2:
+		plot_cluster(new_clusters,new_k_cent)
 	print("new cluster: ",new_clusters)
 	if new_clusters == old_clusters:
 		counter = counter + 1
