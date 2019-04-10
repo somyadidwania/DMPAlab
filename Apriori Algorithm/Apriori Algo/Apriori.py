@@ -34,13 +34,13 @@ def generate_C(items,i):
 					C_gen.append(tuple(t))
 		return C_gen
 
-def prune(C,i,tran_1,min_sup):
+def prune(C,i):
 		subsets_of_C = []
 		pruned_C = []
 		for key in C:
 			subsets_of_C = subsets_of_C + list(combinations(key,i-1))
 			print("Subset od c = ",subsets_of_C)
-			if  [x for x in subsets_of_C if x in L_final] == subsets_of_C:
+			if  all(x in L_final for x in subsets_of_C):
 				pruned_C.append(key)
 			print('Subset of C is :', subsets_of_C)
 			subsets_of_C = []
@@ -82,7 +82,7 @@ i=3
 C = generate_C(list(L2.keys()),i)
 print('C',i,' is : ',C)
 while len(C) > 0:
-	pruned_C = prune(C,i,tran,min_sup)
+	pruned_C = prune(C,i)
 	C=pruned_C
 	if len(pruned_C)>0:
 		C = support_count(tran,C)
